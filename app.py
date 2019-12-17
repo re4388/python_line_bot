@@ -11,6 +11,7 @@ from linebot.models import (
 )
 
 app = Flask(__name__)
+
 line_bot_api = LineBotApi('s19Xzrw8j71uvdzTbFRxTyWHotTOS8AV+VPNDzMGi6nI/uRRrHO5giqGDQBH7AFUsu81rAilC+anC0tZpHeo/oLc819o8I4JIX6XQniJPHSKo+5cgoJOUl7jTHxviMHWV733BXr9T2Js2YkcnPzbTgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('17fcbf83f049ae1a15b387a978d27ce3')
 
@@ -38,23 +39,19 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+                                event.reply_token,
+                                TextSendMessage(text=event.message.text)
+                            )
 
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    # get user id when reply
+    user_id = event.source.user_id
+    print("user_id =", user_id)
 
 if __name__ == "__main__":
     app.run()
 
 
 
-# from flask import Flask
-
-# app = Flask(__name__)
-
-# @app.route('/')
-# def hello_world():
-#     return 'Hello, World!'
-
-# @app.route('/test')
-# def test_page():
-#     return 'In test page!'
