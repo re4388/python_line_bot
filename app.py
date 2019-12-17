@@ -1,5 +1,5 @@
 from flask import Flask, request, abort
-
+import configparser
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -14,10 +14,11 @@ from helper import apple_news, eyny_movie, jenkins
 
 
 app = Flask(__name__)
+config = configparser.ConfigParser()
+config.read("config.ini")
 
-line_bot_api = LineBotApi('s19Xzrw8j71uvdzTbFRxTyWHotTOS8AV+VPNDzMGi6nI/uRRrHO5giqGDQBH7AFUsu81rAilC+anC0tZpHeo/oLc819o8I4JIX6XQniJPHSKo+5cgoJOUl7jTHxviMHWV733BXr9T2Js2YkcnPzbTgdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('17fcbf83f049ae1a15b387a978d27ce3')
-
+line_bot_api = LineBotApi(config['line_bot']['Channel_Access_Token'])
+handler = WebhookHandler(config['line_bot']['Channel_Secret'])
 
 
 @app.route("/callback", methods=['POST'])
@@ -80,6 +81,7 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=content))
         return 0
+
 
 
 
