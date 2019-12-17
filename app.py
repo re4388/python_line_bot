@@ -9,6 +9,8 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
+from helper import apple_news, eyny_movie
+
 
 app = Flask(__name__)
 
@@ -36,6 +38,7 @@ def callback():
     return 'OK'
 
 
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     line_bot_api.reply_message(
@@ -49,6 +52,31 @@ def handle_message(event):
     # get user id when reply
     user_id = event.source.user_id
     print("user_id =", user_id)
+
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    print("event.reply_token:", event.reply_token)
+    print("event.message.text:", event.message.text)
+
+    if event.message.text.lower() == "eyny":
+        content = eyny_movie()
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=content))
+        return 0
+    
+    if event.message.text == "apple":
+        content = apple_news()
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=content))
+        return 0
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run()

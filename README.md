@@ -9,6 +9,10 @@
 4. Manual deploy at Heroku
 5. it shall work
 
+
+app.py -> the file go to server, heroku
+api.py -> you can run locally to invoke the action
+
 # Note
 
 1. you need to have requirement.txt, Procfile and runtime.exe setting as here
