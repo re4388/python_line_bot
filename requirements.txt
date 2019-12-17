@@ -1,5 +1,5 @@
 Flask==1.0.2
 line-bot-sdk==1.8.0
-gunicorn==19.0.0
+gunicorn==19.5.0
 BeautifulSoup4==4.8.1
 bs4
