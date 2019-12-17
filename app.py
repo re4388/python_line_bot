@@ -12,6 +12,7 @@ from linebot.models import (
 from helper import apple_news, eyny_movie
 
 
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi('s19Xzrw8j71uvdzTbFRxTyWHotTOS8AV+VPNDzMGi6nI/uRRrHO5giqGDQBH7AFUsu81rAilC+anC0tZpHeo/oLc819o8I4JIX6XQniJPHSKo+5cgoJOUl7jTHxviMHWV733BXr9T2Js2YkcnPzbTgdB04t89/1O/w1cDnyilFU=')
