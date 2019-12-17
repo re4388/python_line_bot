@@ -1,7 +1,7 @@
 from linebot import LineBotApi
 from linebot.models import TextSendMessage, ImageSendMessage
 from linebot.exceptions import LineBotApiError
-from helper import apple_news, eyny_movie
+from helper import apple_news, eyny_movie, jenkins
 
 
 CHANNEL_ACCESS_TOKEN = "s19Xzrw8j71uvdzTbFRxTyWHotTOS8AV+VPNDzMGi6nI/uRRrHO5giqGDQBH7AFUsu81rAilC+anC0tZpHeo/oLc819o8I4JIX6XQniJPHSKo+5cgoJOUl7jTHxviMHWV733BXr9T2Js2YkcnPzbTgdB04t89/1O/w1cDnyilFU="
@@ -17,7 +17,8 @@ to = profile.user_id
 try:
     # line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
     # line_bot_api.push_message(to, TextSendMessage(text=apple_news()))
-    line_bot_api.push_message(to, TextSendMessage(text=eyny_movie()))
+    # line_bot_api.push_message(to, TextSendMessage(text=eyny_movie()))
+    line_bot_api.push_message(to, TextSendMessage(text=jenkins()))
 except LineBotApiError as e:
     # error handle
     raise e

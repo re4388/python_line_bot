@@ -9,7 +9,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
-from helper import apple_news, eyny_movie
+from helper import apple_news, eyny_movie, jenkins
 
 
 
@@ -40,12 +40,12 @@ def callback():
 
 
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    line_bot_api.reply_message(
-                                event.reply_token,
-                                TextSendMessage(text=event.message.text)
-                            )
+# @handler.add(MessageEvent, message=TextMessage)
+# def handle_message(event):
+#     line_bot_api.reply_message(
+#                                 event.reply_token,
+#                                 TextSendMessage(text=event.message.text)
+#                             )
 
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -60,15 +60,22 @@ def handle_message(event):
     print("event.reply_token:", event.reply_token)
     print("event.message.text:", event.message.text)
 
-    if event.message.text.lower() == "eyny":
+    if event.message.text.lower() == "movie":
         content = eyny_movie()
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=content))
         return 0
     
-    if event.message.text == "apple":
+    if event.message.text.lower() == "apple":
         content = apple_news()
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=content))
+        return 0
+
+    if event.message.text.lower() == "jenkins":
+        content = jenkins()
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=content))

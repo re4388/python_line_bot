@@ -1,5 +1,62 @@
 import requests, re
 from bs4 import BeautifulSoup
+from jenkinsapi import api as API
+from jenkinsapi.jenkins import Jenkins
+from jenkinsapi.build import Build
+from pprint import pprint
+
+def _get_server_instance():
+    jenkins_url = 'http://10.0.4.52:3080/'
+    server = Jenkins(jenkins_url, username='gitadmin', password='muengit')
+    return server
+
+def get_build_info(last_number=0):
+    server = _get_server_instance()
+    job = server.get_job('build')
+    last_one_build = job.__dict__['_data']['builds'][last_number]
+    url = last_one_build['url']
+    number = last_one_build['number']
+    obj = Build(url, number, job)
+    para = obj.get_params()
+    status = obj.get_status()
+    timestamp = obj.get_timestamp().strftime("%Y-%m-%d %H:%M:%S")
+    return (timestamp, para, number, status)
+
+
+
+
+def jenkins():
+    text = ""
+    text += str(get_build_info(last_number=0))
+    text += '\n'
+    text += str(get_build_info(last_number=1))
+    text += '\n'
+    text += str(get_build_info(last_number=2))
+    text += '\n'
+    text += str(get_build_info(last_number=3))
+    text += '\n'
+    text += str(get_build_info(last_number=4))
+    return text
+
+
+
+def apple_news():
+    target_url = 'https://tw.appledaily.com/new/realtime'
+    print('Start parsing appleNews....')
+    rs = requests.session()
+    res = rs.get(target_url, verify=False)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    content = ""
+    for index, data in enumerate(soup.select('.rtddt a'), 0):
+        if index == 5:
+            return content
+        link = data['href']
+        content += '{}\n\n'.format(link)
+    return content
+
+
+
+
 
 
 def apple_news():

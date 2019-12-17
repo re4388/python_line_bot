@@ -17,6 +17,16 @@ api.py -> you can run locally to invoke the action
 
 1. you need to have requirement.txt, Procfile and runtime.exe setting as here
 2. go to Heroku to deploy and see log if any debug needed
+3. if use negok `ngrok http 5000`
+
+## webhook setting
+1. Heroku: 
+   https://python-line-bot-20191217.herokuapp.com/callback
+2. ngrok
+   `ngrok http 5000` and check what thr port forward
+
+
+
 
 # Offical site
 https://developers.line.biz/console/channel/1606909913/messaging-api
