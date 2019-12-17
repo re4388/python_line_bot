@@ -5,6 +5,12 @@ from jenkinsapi.jenkins import Jenkins
 from jenkinsapi.build import Build
 from pprint import pprint
 
+
+
+
+
+
+
 def _get_server_instance():
     jenkins_url = 'http://10.0.4.52:3080/'
     server = Jenkins(jenkins_url, username='gitadmin', password='muengit')
@@ -18,14 +24,16 @@ def get_build_info(last_number=0):
     number = last_one_build['number']
     obj = Build(url, number, job)
     para = obj.get_params()
+    print(para)
+    repo_name = para['REPO_NAME']
+    pjt_name = para['PROJECT_NAME']
     status = obj.get_status()
     timestamp = obj.get_timestamp().strftime("%Y-%m-%d %H:%M:%S")
-    return (timestamp, para, number, status)
+    return (timestamp, repo_name, pjt_name, number, status)
 
 
 
-
-def jenkins():
+def get_build_result_from_jenkins():
     text = ""
     text += str(get_build_info(last_number=0))
     text += '\n'

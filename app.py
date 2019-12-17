@@ -9,7 +9,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
-from helper import apple_news, eyny_movie, jenkins
+from helper import apple_news, eyny_movie, get_build_result_from_jenkins
 
 
 
@@ -76,7 +76,7 @@ def handle_message(event):
         return 0
 
     if event.message.text.lower() == "jenkins":
-        content = jenkins()
+        content = get_build_result_from_jenkins()
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=content))
