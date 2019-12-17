@@ -1,2 +1,1 @@
-web: gunicorn python_line_bot.wsgi
-
+web gunicorn app:app --preload
