@@ -1,1 +1,2 @@
-web: gunicorn snow_resort_bot.wsgi
+web: gunicorn python_line_bot.wsgi
+
