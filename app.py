@@ -17,8 +17,12 @@ app = Flask(__name__)
 config = configparser.ConfigParser()
 config.read("config.ini")
 
-line_bot_api = LineBotApi(config['line_bot']['Channel_Access_Token'])
-handler = WebhookHandler(config['line_bot']['Channel_Secret'])
+
+
+# line_bot_api = LineBotApi(config['line_bot']['Channel_Access_Token'])
+line_bot_api = LineBotApi("s19Xzrw8j71uvdzTbFRxTyWHotTOS8AV+VPNDzMGi6nI/uRRrHO5giqGDQBH7AFUsu81rAilC+anC0tZpHeo/oLc819o8I4JIX6XQniJPHSKo+5cgoJOUl7jTHxviMHWV733BXr9T2Js2YkcnPzbTgdB04t89/1O/w1cDnyilFU=")
+# handler = WebhookHandler(config['line_bot']['Channel_Secret'])
+handler = WebhookHandler("17fcbf83f049ae1a15b387a978d27ce3")
 
 
 @app.route("/callback", methods=['POST'])

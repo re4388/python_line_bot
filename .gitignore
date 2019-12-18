@@ -6,6 +6,8 @@ config.ini
 # C extensions
 *.so
 
+_api.py
+
 # Distribution / packaging
 .Python
 build/
